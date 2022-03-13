@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\LogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return "Fogger is running";
 });
+
+Route::get('/entries', [LogController::class, 'index']);
+Route::get('/entries/{entry}', [LogController::class, 'show'])->name('entry.show');
