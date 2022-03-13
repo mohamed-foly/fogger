@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/entries', [LogController::class, 'store']);
+Route::post('/entries', [LogController::class, 'store'])->middleware('auth:sanctum');
