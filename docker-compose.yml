@@ -1,0 +1,9 @@
+version: '2.2'
+
+services:
+  fogger:
+    build: ./
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - "5051:80"
