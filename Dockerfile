@@ -1,6 +1,4 @@
-FROM m0foly/phuntole:latest
-RUN apt-get update && apt install php8.1-sqlite3
+FROM phpswoole/swoole:4.8-php8.1-alpine
 COPY . /var/www/html
-WORKDIR /var/www/html
-RUN composer install
-ENTRYPOINT [ "/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf" ]
+RUN docker-php-ext-install pcntl mysqli pdo_mysql && cd /var/www/html && composer install
+CMD ["php", "/var/www/html/artisan", "octane:start", "--host", "0.0.0.0", "--port", "80"]
