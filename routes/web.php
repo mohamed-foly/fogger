@@ -18,5 +18,13 @@ Route::get('/', function () {
     return "Fogger is running";
 });
 
-Route::get('/entries', [LogController::class, 'index']);
-Route::get('/entries/{entry}', [LogController::class, 'show'])->name('entry.show');
+Route::middleware('auth')->group(function(){
+    Route::get('/entries', [LogController::class, 'index'])->name('entries.index');
+    Route::get('/entries/{entry}', [LogController::class, 'show'])->name('entry.show');    
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
